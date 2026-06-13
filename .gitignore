@@ -1,0 +1,14 @@
+# Langflow service local-only files
+.env
+.env.*
+!.env.sample
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.db
+*.sqlite
+*.sqlite3
+logs/
+langflow-data/
+.DS_Store
