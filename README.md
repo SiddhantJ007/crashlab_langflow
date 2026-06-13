@@ -17,7 +17,7 @@ This service is intentionally separate from the main CrashLab repo so CrashLab r
 Do not deploy Langflow inside the CrashLab app process.
 
 ## Files Included
-- `requirements.txt`: pins `langflow==1.8.4`
+- `requirements.txt`: pins `langflow==1.8.4` and `cuga==0.2.6` to match the locally working dependency set
 - `.python-version`: pins Python 3.12.9
 - `.env.sample`: example service env vars
 - `render.yaml`: optional Render scaffold
