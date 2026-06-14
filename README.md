@@ -17,7 +17,8 @@ This service is intentionally separate from the main CrashLab repo so CrashLab r
 Do not deploy Langflow inside the CrashLab app process.
 
 ## Files Included
-- `requirements.txt`: pins `langflow==1.8.4`, `cuga==0.2.6`, and the compatible Google integration versions from the locally working setup to avoid Render resolver conflicts
+- `requirements.txt`: keeps the top-level install simple with `langflow==1.8.4`
+- `constraints.txt`: exact lock-style package constraints exported from the locally working `lf-venv` to stop Render dependency backtracking
 - `.python-version`: pins Python 3.12.9
 - `.env.sample`: example service env vars
 - `render.yaml`: optional Render scaffold
@@ -27,7 +28,7 @@ Do not deploy Langflow inside the CrashLab app process.
 ## Render Setup
 Build command:
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt -c constraints.txt
 ```
 
 Start command:
@@ -96,3 +97,6 @@ curl -sS -X POST "https://your-langflow-service.onrender.com/api/v1/run/YOUR_FLO
 ```
 
 Only after that should you reconnect CrashLab.
+
+## Why `constraints.txt` Exists
+Render was spending 90+ minutes backtracking through Langflow's optional dependency graph instead of building the service. This scaffold now installs Langflow with an exact constraints set exported from the working local environment so Render can install a known-good package graph directly.

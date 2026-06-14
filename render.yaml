@@ -3,7 +3,7 @@ services:
     name: langflow-feedback-service
     env: python
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r requirements.txt -c constraints.txt
     startCommand: bash scripts/start.sh
     envVars:
       - key: PYTHON_VERSION
