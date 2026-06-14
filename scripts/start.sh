@@ -10,11 +10,10 @@ export LANGFLOW_PORT="${PORT:-${LANGFLOW_PORT:-7860}}"
 export LANGFLOW_LOG_LEVEL="${LANGFLOW_LOG_LEVEL:-info}"
 export DO_NOT_TRACK="${DO_NOT_TRACK:-true}"
 
-printf 'Starting Langflow backend on %s:%s\n' "$LANGFLOW_HOST" "$LANGFLOW_PORT"
+printf 'Starting Langflow ASGI backend on %s:%s\n' "$LANGFLOW_HOST" "$LANGFLOW_PORT"
 
-exec python -m langflow run \
+exec python -m uvicorn render_app:create_app \
+  --factory \
   --host "$LANGFLOW_HOST" \
   --port "$LANGFLOW_PORT" \
-  --backend-only \
-  --no-open-browser \
   --log-level "$LANGFLOW_LOG_LEVEL"
